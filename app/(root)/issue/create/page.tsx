@@ -17,7 +17,7 @@ const CreatePage = () => {
 
     const handleSubmit = async (values: IssueFormTypes) => {
         try {
-            const response = await axiosInstance.post('http://localhost:3001/api/issues', { ...values });
+            const response = await axiosInstance.post('/issues', { ...values });
             if (response.data !== undefined) {
                 toast.success("New Issue added.", {
                     position: "top-right",

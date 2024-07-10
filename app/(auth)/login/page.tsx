@@ -46,7 +46,7 @@ const Login = () => {
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
         try {
-            const response = await axios.post('http://localhost:3001/api/auth/signin', values);
+            const response = await axios.post('/auth/signin', values);
             localStorage.setItem('token', response.data.token);
             dispatch(fetchUserDetails());
             router.push('/');

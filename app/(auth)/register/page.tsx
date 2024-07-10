@@ -52,7 +52,7 @@ const Register = () => {
 
     async function onSubmit(values: z.infer<typeof formSchema>) {
         try {
-            const response = await axios.post('http://localhost:3001/api/auth/signup', values);
+            const response = await axios.post('/auth/signup', values);
             localStorage.setItem('token', response.data.token);
             router.push('/singin');
         } catch (error) {

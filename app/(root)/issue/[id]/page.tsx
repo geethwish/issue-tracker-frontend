@@ -28,7 +28,7 @@ export default function IssueDetail({ params }: { params: { id: string } }) {
 
     const fetchIssueById = async () => {
         if (params.id) {
-            axiosInstance.get(`http://localhost:3001/api/issues/${params.id}`)
+            axiosInstance.get(`/issues/${params.id}`)
                 .then(response => setIssue(response.data))
                 .catch(error => console.error(error));
         }
@@ -49,7 +49,7 @@ export default function IssueDetail({ params }: { params: { id: string } }) {
     const handleSubmit = async (values: IssueFormTypes) => {
 
         try {
-            const response = await axiosInstance.put(`http://localhost:3001/api/issues/${params.id}`, { ...values });
+            const response = await axiosInstance.put(`/issues/${params.id}`, { ...values });
             if (response.data !== undefined) {
                 toast.success("New Issue added.", {
                     position: "top-right",
@@ -65,7 +65,7 @@ export default function IssueDetail({ params }: { params: { id: string } }) {
 
     const handleDelete = async () => {
         try {
-            const response = await axiosInstance.delete(`http://localhost:3001/api/issues/${params.id}`);
+            const response = await axiosInstance.delete(`/issues/${params.id}`);
             if (response.data !== undefined) {
                 toast.success("Issue has been deleted", {
                     position: "top-right",
