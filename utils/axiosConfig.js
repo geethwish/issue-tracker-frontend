@@ -1,7 +1,12 @@
 import axios from "axios";
 import { toast } from "react-toastify";
 
-// Create an Axios instance
+// Log the base URL to verify it is being set correctly
+console.log("Base URL:", process.env.NEXT_PUBLIC_API_BASE_URL);
+
+axios.defaults.baseURL =
+  process.env.NEXT_PUBLIC_API_BASE_URL ??
+  "https://issue-tracker-gw-dc161ae755ff.herokuapp.com/api";
 const axiosInstance = axios.create({
   baseURL:
     process.env.NEXT_PUBLIC_API_BASE_URL ??
