@@ -3,7 +3,9 @@ import { toast } from "react-toastify";
 
 // Create an Axios instance
 const axiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:3001/api",
+  baseURL:
+    process.env.NEXT_PUBLIC_API_BASE_URL ??
+    "https://issue-tracker-gw-dc161ae755ff.herokuapp.com/api",
 });
 
 // Request interceptor to add the authorization token to requests
