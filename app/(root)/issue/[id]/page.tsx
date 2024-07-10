@@ -1,4 +1,5 @@
 "use client"
+import axiosInstance from '@/utils/axiosConfig';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 
@@ -16,7 +17,7 @@ export default function IssueDetail({ params }: { params: { id: string } }) {
 
     useEffect(() => {
         if (params.id) {
-            axios.get(`http://localhost:3001/api/issues/${params.id}`)
+            axiosInstance.get(`http://localhost:3001/api/issues/${params.id}`)
                 .then(response => setIssue(response.data))
                 .catch(error => console.error(error));
         }

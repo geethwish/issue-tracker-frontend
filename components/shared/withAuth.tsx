@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 const withAuth = <P extends object>(WrappedComponent: React.ComponentType<P>) => {
@@ -9,7 +9,7 @@ const withAuth = <P extends object>(WrappedComponent: React.ComponentType<P>) =>
         useEffect(() => {
             const token = localStorage.getItem('token');
             if (!token) {
-                router.push('/signin');
+                router.push('/login');
             }
         }, [router]);
 

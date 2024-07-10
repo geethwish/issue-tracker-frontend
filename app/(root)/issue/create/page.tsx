@@ -1,4 +1,5 @@
 "use client"
+import axiosInstance from '@/utils/axiosConfig';
 import axios from 'axios';
 import { useState } from 'react';
 
@@ -9,7 +10,7 @@ const CreatePage = () => {
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:3001/api/issues', { title, description });
+            await axiosInstance.post('http://localhost:3001/api/issues', { title, description });
 
         } catch (error) {
             console.error(error);
