@@ -20,15 +20,18 @@ import {
 } from '@tanstack/react-table';
 import { FaSort } from 'react-icons/fa';
 import React from 'react';
+import { fetchUserDetails } from '@/store/slices/user.slice';
+import { AppDispatch } from '@/store/store';
+import { useDispatch } from 'react-redux';
 
 export type IssuesType = {
     id: number;
     title: string;
     description: string;
-    severity: null | number;
-    priority: null | number;
+    severity: null | 'normal' | 'medium' | 'high';
+    priority: null | 'normal' | 'medium' | 'high';
     userId: number;
-    status: 'Open' | 'processing' | 'success' | 'failed';
+    status: 'open' | 'processing' | 'success' | 'failed';
 };
 
 export const columns: ColumnDef<IssuesType>[] = [
@@ -82,7 +85,6 @@ function Home() {
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
     const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
     const [rowSelection, setRowSelection] = useState({});
-
     const table = useReactTable({
         data: issues,
         columns,

@@ -17,6 +17,9 @@ import {
 import { Input } from "@/components/ui/input"
 import axios from 'axios'
 import Link from 'next/link'
+import { useDispatch } from 'react-redux';
+import { fetchUserDetails } from '@/store/slices/user.slice'
+import { AppDispatch } from '@/store/store'
 
 const formSchema = z.object({
     email: z.string().email({
@@ -29,6 +32,7 @@ const formSchema = z.object({
 
 
 const Login = () => {
+    const dispatch = useDispatch<AppDispatch>();
     const router = useRouter();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -44,6 +48,7 @@ const Login = () => {
         try {
             const response = await axios.post('http://localhost:3001/api/auth/signin', values);
             localStorage.setItem('token', response.data.token);
+            dispatch(fetchUserDetails());
             router.push('/');
         } catch (error) {
             console.error(error);

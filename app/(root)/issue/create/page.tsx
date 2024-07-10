@@ -1,16 +1,29 @@
 "use client"
+import IssueForm from '@/components/shared/issueForm';
 import axiosInstance from '@/utils/axiosConfig';
 import axios from 'axios';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 const CreatePage = () => {
-    const [title, setTitle] = useState('');
-    const [description, setDescription] = useState('');
+    const router = useRouter();
+    const defaultValues = {
+        title: "",
+        description: "",
+        priority: "normal",
+        severity: "normal",
+        status: 'open',
+    }
 
-    const handleSubmit = async (e: any) => {
-        e.preventDefault();
+    const handleSubmit = async (values: IssueFormTypes) => {
         try {
-            await axiosInstance.post('http://localhost:3001/api/issues', { title, description });
+            const response = await axiosInstance.post('http://localhost:3001/api/issues', { ...values });
+            if (response.data !== undefined) {
+                toast.success("New Issue added.", {
+                    position: "top-right",
+                });
+                router.push("/")
+            }
 
         } catch (error) {
             console.error(error);
@@ -18,29 +31,7 @@ const CreatePage = () => {
     };
 
     return (
-        <div className="container mx-auto">
-            <h1 className="text-3xl font-bold">Create Issue</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Title</label>
-                    <input
-                        type="text"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Description</label>
-                    <textarea
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                        required
-                    ></textarea>
-                </div>
-                <button type="submit">Create</button>
-            </form>
-        </div>
+        <div className='w-full flex items-center justify-center h-full'><IssueForm onSubmit={handleSubmit} formType='NEW' defaultValues={defaultValues} /></div>
     )
 }
 
