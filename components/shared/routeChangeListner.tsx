@@ -1,7 +1,8 @@
 'use client';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { useLoading } from '../../app/layout';
+import { useLoading } from './loadingProvider';
+
 
 const RouteChangeListener = () => {
     const router = useRouter();

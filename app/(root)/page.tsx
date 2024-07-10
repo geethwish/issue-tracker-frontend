@@ -20,9 +20,7 @@ import {
 } from '@tanstack/react-table';
 import { FaSort } from 'react-icons/fa';
 import React from 'react';
-import { fetchUserDetails } from '@/store/slices/user.slice';
-import { AppDispatch } from '@/store/store';
-import { useDispatch } from 'react-redux';
+
 
 export type IssuesType = {
     id: number;
@@ -34,7 +32,7 @@ export type IssuesType = {
     status: 'open' | 'processing' | 'success' | 'failed';
 };
 
-export const columns: ColumnDef<IssuesType>[] = [
+const dataColumns: ColumnDef<IssuesType>[] = [
     {
         accessorKey: 'id',
         header: 'Id',
@@ -87,7 +85,7 @@ function Home() {
     const [rowSelection, setRowSelection] = useState({});
     const table = useReactTable({
         data: issues,
-        columns,
+        columns: dataColumns,
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
         getSortedRowModel: getSortedRowModel(),
@@ -143,7 +141,7 @@ function Home() {
                                 ))
                             ) : (
                                 <TableRow>
-                                    <TableCell colSpan={columns.length} className="h-24 text-center">
+                                    <TableCell colSpan={dataColumns.length} className="h-24 text-center">
                                         No results.
                                     </TableCell>
                                 </TableRow>
